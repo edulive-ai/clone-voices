@@ -136,6 +136,11 @@ def normalize_vietnamese_text(text):
             .replace("'", "")
             .replace("AI", "Ây Ai")
             .replace("A.I", "Ây Ai")
+            .replace("+", "cộng")
+            .replace("-", "trừ")
+            .replace("*", "nhân")
+            .replace("/", "chia")
+            .replace("=", "bằng")
         )
         return text
     except Exception as e:

@@ -73,7 +73,7 @@ def calculate_keep_len(text, lang):
 
 
 def normalize_vietnamese_text(text):
-    text = (
+    text =(
         TTSnorm(text, unknown=False, lower=False, rule=True)
         .replace("..", ".")
         .replace("!.", "!")
@@ -84,7 +84,12 @@ def normalize_vietnamese_text(text):
         .replace("'", "")
         .replace("AI", "Ây Ai")
         .replace("A.I", "Ây Ai")
-    )
+        .replace("+", "cộng")
+        .replace("-", "trừ")
+        .replace("*", "nhân")
+        .replace("/", "chia")
+        .replace("=", "bằng")
+        )
     return text
 
 
@@ -189,7 +194,7 @@ except:
                                 xtts_vocab="model/vocab.json")
 print("> Đã nạp mô hình")
 
-input_text = "Xin chào bạn sách nói"
+input_text = "1 + 1 = 2"
 reference_audio = "Seren2.wav" 
 normalize_text = True
 verbose = True

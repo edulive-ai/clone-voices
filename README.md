@@ -25,6 +25,7 @@ stt\Scripts\activate     # Trên Windows
 ## 📦 2. Cài đặt thư viện
 
 ```bash
+sudo apt install fmpeg ## cai dat fmpeg
 pip install -r requirements.txt
 
 ```
@@ -33,6 +34,12 @@ pip install -r requirements.txt
 python3 setup_vixtts.py # ubuntu/linux
 python setup_vixtts.py # windows 
 ```
+## 4. Run
+```bash
+python3 app.py # ubuntu/linux
+python app.py # windows 
+```
+
 
 
 

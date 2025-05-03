@@ -42,7 +42,30 @@ print(f"Đã tải mô hình thành công trong {end_load_time - start_load_time
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Đang sử dụng thiết bị: {device}")
 model.to(device)
-
+def normalize_vietnamese_text(text):
+    """Chuẩn hóa văn bản tiếng Việt"""
+    try:
+        text = (
+            TTSnorm(text, unknown=False, lower=False, rule=True)
+            .replace("..", ".")
+            .replace("!.", "!")
+            .replace("?.", "?")
+            .replace(" .", ".")
+            .replace(" ,", ",")
+            .replace('"', "")
+            .replace("'", "")
+            .replace("AI", "Ây Ai")
+            .replace("A.I", "Ây Ai")
+            .replace("+", "cộng")
+            .replace("-", "trừ")
+            .replace("*", "nhân")
+            .replace("/", "chia")
+            .replace("=", "bằng")
+        )
+        return text
+    except Exception as e:
+        print(f"Lỗi khi chuẩn hóa văn bản: {e}")
+        return text
 def allowed_file(filename):
     """Kiểm tra xem tệp có đuôi hợp lệ hay không"""
     return '.' in filename and \
@@ -52,7 +75,7 @@ def text_to_speech(text, speaker_wav, output_path, language="vi"):
     """Chuyển đổi văn bản thành giọng nói, sử dụng mẫu giọng từ file audio"""
     # Tạo thư mục đầu ra nếu chưa tồn tại
     os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
-    
+    text = normalize_vietnamese_text(text)
     # Bắt đầu đo thời gian cho việc tạo conditioning latents
     start_cond_time = time.time()
     # Tạo conditioning latents từ file giọng mẫu
@@ -243,4 +266,4 @@ def api_tts():
 
 if __name__ == '__main__':
     # Chạy ứng dụng Flask trên cổng 9322
-    app.run(host='0.0.0.0', port=9321, debug=True)
+    app.run(host='0.0.0.0', port=9321, debug=False)
