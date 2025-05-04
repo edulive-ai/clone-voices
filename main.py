@@ -195,14 +195,14 @@ except:
 print("> Đã nạp mô hình")
 
 input_text = "1 + 1 = 2"
-reference_audio = "Seren2.wav" 
+reference_audio = "/reference/Seren2.wav" 
 normalize_text = True
 verbose = True
 output_chunks = False 
 
 if not os.path.exists(reference_audio):
     print("⚠️⚠️⚠️Bạn chưa tải file âm thanh lên. Hãy chọn giọng khác, hoặc tải file của bạn lên ở bên dưới.⚠️⚠️⚠️")
-    audio_file="Seren2.wav"
+    audio_file="/reference/Seren2.wav"
 else:
     audio_file = run_tts(vixtts_model,
             lang="vi",
