@@ -8,7 +8,7 @@ from flask import Flask, request, render_template, send_file, jsonify
 from werkzeug.utils import secure_filename
 from TTS.tts.configs.xtts_config import XttsConfig
 from TTS.tts.models.xtts import Xtts
-
+from vinorm import TTSnorm
 app = Flask(__name__)
 
 # Cấu hình thư mục lưu trữ
